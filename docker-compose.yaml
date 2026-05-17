@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysql:
+    image: mysql
+    ports:
+    - 3306:3306
+    environment:
+    - MYSQL_ROOT_PASSWORD=rootpass
+    - MYSQL_DATABASE=team-member-projects
+    - MYSQL_USER=admin
+    - MYSQL_PASSWORD=adminpass
+    volumes:
+    - mysql-data:/var/lib/mysql
+    container_name: mysql
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+    - 8083:80
+    depends_on: 
+    - mysql
+    container_name: phpmyadmin
+volumes:
+  mysql-data:
+    driver: local
